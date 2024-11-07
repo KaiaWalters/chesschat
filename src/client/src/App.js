@@ -10,8 +10,9 @@ function App() {
   const callback = (data) => {
     setDataStore({
       currentMove: data, 
-      comments: 
+      comments: ''
     })
+
   };
 
   useEffect(() => {
