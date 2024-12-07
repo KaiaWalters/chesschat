@@ -4,18 +4,17 @@ function CommentSection(currentMove) {
     const [comment, setComment] = useState({});
     // state object needs to match the same structure as the object you are trying to save to state
     
-    function submitComment(event) {
-        event.preventDefault()
-        const formData = new FormData(event.target)
-        const commentTitle = formData.get('title')
-        const comment = formData.get('comment')
-        setComment({ "comment": comment, "commentTitle": commentTitle, "move": currentMove })
-        console.log("comment",comment, "move", currentMove)
-    }
+    // function submitComment(event) {
+    //     event.preventDefault()
+    //     const formData = new FormData(event.target)
+    //     const commentTitle = formData.get('title')
+    //     const comment = formData.get('comment')
+    //     setComment({ "comment": comment, "commentTitle": commentTitle, "move": currentMove })
+    // }
   
     return (
         <>  
-            <form onSubmit={submitComment}>
+            <form action="/comment" method="GET">
                 <input name="title" defaultValue={"title"} />
                 <input name="comment" defaultValue={"comment"} />
                 <button type="submit">Add to Cart</button>

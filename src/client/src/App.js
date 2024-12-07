@@ -6,20 +6,18 @@ import { useEffect } from 'react';
 
 function App() {
   let [dataStore, setDataStore] = useState({})
-
-  const callback = (data) => {
-    setDataStore({
-      currentMove: data, 
-      comments: ''
-    })
-
-  };
-
+  
   useEffect(() => {
     if ( dataStore !== null) {
       console.log("Turn data updated:", dataStore);
     }
   }, [dataStore])
+
+  const callback = (data) => {
+    setDataStore({
+      currentMove: data 
+    })
+  };
 
   return (
     <div className="App">
@@ -30,3 +28,11 @@ function App() {
 }
 
 export default App;
+
+
+//access to our comments 
+//comments need to be displayed on cards and saved as an array 
+// comments need to be posted to api to be handled 
+//then we rip out the data store since this can happen externally 
+// also the logig for cleaning up the moves should not be on the client side since it leaves that feature vulnerable
+//
