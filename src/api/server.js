@@ -24,11 +24,21 @@ const commentSchema = {
         require: true
      }
 }
-const comment = mongoose.model("Turns", commentSchema)
+
+const Comment = mongoose.model("turns", commentSchema)
+
+app.get('/get', async(req, res) => {
+    try {
+        let results = await Comment.find({})
+        res.send(results).status(200);
+    } catch (error) {
+        console.log(error)
+        res.json(error);
+    }
+})
 
 app.post('/post', async (req, res) => {
-    console.log("called")
-    const data = new comment({
+    const data = new Comment({
         title: req.body.title,
         comment: req.body.comment
     })
@@ -36,32 +46,10 @@ app.post('/post', async (req, res) => {
     res.json(val)
 });
 
-const port = process.env.PORT || 3001; // Use the port provided by the host or default to 3000
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 })
-
-// function testMongo(comments) {
-//     const turnCommentSchema = new mongoose.Schema({
-//         title: {
-//             type: String,
-//             require: true
-//         },
-//         comment: {
-//             type: String,
-//             require: true
-//         }
-//     })
-
-//     const turnComment = new mongoose.model("turnComment", turnCommentSchema)
-
-//     const mage_1 = new turnComment({
-//         title: `${comments.commentTitle}`,
-//         comment: `${comments.comment}`
-//     });
-
-//     mage_1.save();
-// }
 
 
 
