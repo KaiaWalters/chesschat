@@ -4,9 +4,9 @@ import express from 'express';
 const app = express()
 app.use(express.json())
 
-const uri = "mongodb+srv://newbaby:opennow@cluster0.2knf4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-const buri = "mongodb+srv://newbaby:opennow@cluster0.2knf4.mongodb.net/Cluster0?authSource=admin"
-mongoose.connect(buri).catch(error => {
+const uri = "mongodb+srv://newbaby:enternow@cluster0.2knf4.mongodb.net/Chess?retryWrites=true&w=majority";
+
+mongoose.connect(uri).catch(error => {
     if(!error){
         console.log("connected to the database")
     }else {
@@ -24,7 +24,8 @@ const commentSchema = {
         require: true
      }
 }
-const comment = mongoose.model("newCol", commentSchema)
+const comment = mongoose.model("Turns", commentSchema)
+
 app.post('/post', async (req, res) => {
     console.log("called")
     const data = new comment({
