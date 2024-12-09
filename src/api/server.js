@@ -22,7 +22,11 @@ const commentSchema = {
     comment: {
         type: String,
         require: true
-     }
+     }, 
+    move: {
+        type: String, 
+        require: true
+    }
 }
 
 const Comment = mongoose.model("turns", commentSchema)
@@ -37,13 +41,22 @@ app.get('/get', async(req, res) => {
     }
 })
 
-app.post('/post', async (req, res) => {
+app.post('/api/post', async (req, res) => {
+    console.log("request", req.body)
     const data = new Comment({
         title: req.body.title,
-        comment: req.body.comment
+        comment: req.body.comment, 
+        move: req.body.move
     })
-    const val = await data.save()
-    res.json(val)
+    try {
+        const val = await data.save()
+        res.status(201).json(val)
+        console.log("post called")
+    } catch(error) {
+        console.error("Error saving data:", error);
+        res.status(500).json({ error: error.message });
+    }
+  
 });
 
 const port = process.env.PORT || 3001;
