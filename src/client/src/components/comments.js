@@ -1,16 +1,20 @@
+import { toHaveErrorMessage } from "@testing-library/jest-dom/matchers";
 import { useState } from "react"
 
 function CommentSection(currentMove) {
-    const [comment, setComment] = useState({});
+    const [comment, setComment] = useState({ "content": "", "title": "", "move": currentMove });
     // state object needs to match the same structure as the object you are trying to save to state
     
     function handleSubmit(event) {
         event.preventDefault()
-        const postUrl = 'http://localhost:3001/api/post/'
+        const postUrl = 'http://localhost:3001/post'
         const formData = new FormData(event.target)
-        const commentTitle = formData.get('title')
-        const comment = formData.get('comment')
-        setComment({ "comment": comment, "commentTitle": commentTitle, "move": currentMove })
+        const title = formData.get('title')
+        const content = formData.get('comment')
+
+        setComment({"title": title, "content": content,  "move": currentMove })
+        
+        console.log(comment)
         
         fetch(postUrl, {
             method: 'POST',
@@ -18,18 +22,19 @@ function CommentSection(currentMove) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ // We should keep the fields consistent for managing this data later
-                title: comment.commentTitle, 
-                comment: comment.comment, 
+            body: JSON.stringify({ 
+                title: comment.title, 
+                content: comment.content, 
                 move: comment.move
             })
         })
-        .then(()=>{
-            alert('You have been added to the system!');
+        .then((response) => {
+            return response.json();
         })
         .catch((error) => {
-            console.error("Failed to fetch:", error);
+            console.error('Error:', error);
         });
+    
     }
   
     return (
