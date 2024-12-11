@@ -7,9 +7,8 @@ const app = express()
 app.use(cors({origin: 'http://localhost:3000'}))
 app.use(express.json())
 
-const uri = "mongodb+srv://newbaby:enternow@cluster0.2knf4.mongodb.net/Chess?retryWrites=true&w=majority";
 
-mongoose.connect(uri).catch(error => {
+mongoose.connect(process.env.DB_URI).catch(error => {
     if(!error){
         console.log("connected to the database")
     }else {
