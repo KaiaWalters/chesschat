@@ -20,15 +20,15 @@ mongoose.connect(uri).catch(error => {
 const commentSchema = {
     title: {
         type: String,
-         require: true
+         required: true
         },
-    comment: {
+    content: {
         type: String,
-        require: true
+        required: true
      }, 
-    move: {
-        type: String, 
-        require: true
+     move: {
+        type: Object,
+        required: true
     }
 }
 
@@ -46,6 +46,7 @@ app.get('/get', async(req, res) => {
 
 app.post('/post', async (req, res) => {
 
+    console.log("body", req.body)
     const data = new Comment({
         title: req.body.title,
         content: req.body.content, 
@@ -53,19 +54,17 @@ app.post('/post', async (req, res) => {
     })
 
     try {
-        if (data.title | data.comment | data.move != undefined) {
+        if (data.title && data.content && data.move) {
             const val = await data.save()
             res.status(201).json(val)
         } else {
-            res.status(400)
-            res.end()
+            res.status(400).json({ error: 'Missing required fields' });
         }
 
     } catch(error) {
         console.error("Error saving data:", error);
         res.status(500).json({ error: error.message });
     }
-  
 });
 
 const port = process.env.PORT || 3001;

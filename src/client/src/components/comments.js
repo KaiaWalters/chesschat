@@ -2,7 +2,7 @@ import { toHaveErrorMessage } from "@testing-library/jest-dom/matchers";
 import { useState } from "react"
 
 function CommentSection(currentMove) {
-    const [comment, setComment] = useState({ "content": "", "title": "", "move": currentMove });
+    const [comment, setComment] = useState({});
     // state object needs to match the same structure as the object you are trying to save to state
     
     function handleSubmit(event) {
@@ -12,9 +12,13 @@ function CommentSection(currentMove) {
         const title = formData.get('title')
         const content = formData.get('comment')
 
-        setComment({"title": title, "content": content,  "move": currentMove })
+        const comment = {
+            title: title,
+            content: content,
+            move: currentMove,
+        };    
         
-        console.log(comment)
+        console.log("CURRENT MOVE", currentMove)
         
         fetch(postUrl, {
             method: 'POST',
@@ -25,7 +29,7 @@ function CommentSection(currentMove) {
             body: JSON.stringify({ 
                 title: comment.title, 
                 content: comment.content, 
-                move: comment.move
+                move: comment.move.data
             })
         })
         .then((response) => {
