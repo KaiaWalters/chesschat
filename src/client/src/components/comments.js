@@ -1,9 +1,7 @@
-import { toHaveErrorMessage } from "@testing-library/jest-dom/matchers";
 import { useState } from "react"
 
 function CommentSection(currentMove) {
     const [comment, setComment] = useState({});
-    // state object needs to match the same structure as the object you are trying to save to state
     
     function handleSubmit(event) {
         event.preventDefault()
@@ -17,9 +15,7 @@ function CommentSection(currentMove) {
             content: content,
             move: currentMove,
         };    
-        
-        console.log("CURRENT MOVE", currentMove)
-        
+                
         fetch(postUrl, {
             method: 'POST',
             headers: {
