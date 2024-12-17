@@ -29,12 +29,12 @@ function ChessBoard({callback}) {
       to: targetSquare,
       promotion: "q",// always promote to a queen for example simplicity
     });
+     // illegal move
 
     if (move === null) return false;
     
     callback(move)
 
-    // illegal move
     setTimeout(makeRandomMove, 200);
     return true;
   }
