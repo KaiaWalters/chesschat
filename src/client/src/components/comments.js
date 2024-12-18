@@ -1,4 +1,3 @@
-import { useState } from "react"
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -49,14 +48,15 @@ export default function CommentSection(currentMove) {
         <>  
             <Box
                 component="form"
-                sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-                noValidate
+                display='flex'
+                flexDirection='column'
+                rowGap={'8px'}
                 autoComplete="off"
                 action="/api/comment"
                 onSubmit={handleSubmit} 
                 method="POST"
             >
-                  <TextField id='title_field' label="Title" variant="outlined" name="title" />
+                  <TextField id='title_field' label="Title" variant="outlined" name="title"/>
                   <TextField id="content_field" label="Content" variant="outlined" name="content"/>
                   <Button type="submit" variant="outlined">Outlined</Button>
             </Box>

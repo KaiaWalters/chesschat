@@ -40,11 +40,7 @@ function ChessBoard({callback}) {
   }
 
   return (
-    <div className="App">
-      <Box width={'600px'}>
-        <Chessboard position={game.fen()} onPieceDrop={onDrop}/>
-      </Box>
-    </div>
+    <Chessboard position={game.fen()} onPieceDrop={onDrop}/>
   );
 }
 
