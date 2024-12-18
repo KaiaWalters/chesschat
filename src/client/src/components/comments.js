@@ -1,17 +1,20 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import MinHeightTextarea from './textarea.js'
 import Button from '@mui/material/Button';
 
-export default function CommentSection(currentMove) {    
+
+export default function CommentSection(currentMove) {  
+
+    let playerHasMoved = currentMove.data.hasOwnProperty('currentMove')
+
     function handleSubmit(event) {
-        console.log("handled!")
         event.preventDefault()
         const postUrl = 'http://localhost:3001/post'
         const formData = new FormData(event.target)
         const title = formData.get('title')
         const content = formData.get('content')
-        const playerHasMoved = currentMove.data.hasOwnProperty('currentMove')
 
         if(playerHasMoved) {
             const comment = {
@@ -40,7 +43,7 @@ export default function CommentSection(currentMove) {
                 console.error('Error:', error);
             });
         } else {
-            console.log('disable submit button')
+           alert("you need to make a move before commenting")
         }
     }
   
@@ -57,8 +60,8 @@ export default function CommentSection(currentMove) {
                 method="POST"
             >
                   <TextField id='title_field' label="Title" variant="outlined" name="title"/>
-                  <TextField id="content_field" label="Content" variant="outlined" name="content"/>
-                  <Button type="submit" variant="outlined">Outlined</Button>
+                  <MinHeightTextarea label="Content" id="content_field" variant="outlined" name="content" aria-label="minimum height" minRows={3} placeholder="Minimum 3 rows" />
+                  <Button disabled={!playerHasMoved} type="submit" variant="filled">Submit</Button>
             </Box>
         </>
     )
