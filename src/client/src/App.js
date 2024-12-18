@@ -2,7 +2,7 @@ import ChessBoard from './components/chessboard';
 import CommentSection from './components/comments';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Grid } from '@mui/system';
+import { color, Grid } from '@mui/system';
 import {Box} from '@mui/system';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -26,16 +26,16 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <Box sx={{}}>
       <Grid container spacing={2} margin={'64px'}>
         <Grid justifyContent='center' size={{sm:2, md:4, lg:6}}>
             <ChessBoard callback={callback}/> 
         </Grid>
-        <Grid sx={{border:'2px solid grey'}} size={4} padding="32px">
+        <Grid sx={{background:'#A9AFB1'}} size={4} padding="32px">
           <CommentSection data={dataStore}/>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   )
 }
 
