@@ -3,20 +3,25 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MinHeightTextarea from './textarea.js'
 import Button from '@mui/material/Button';
-
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 export default function CommentSection(currentMove) {  
+    
+    const [moveAvailable, setMoveAvailable] = useState(!!currentMove)
 
-    let playerHasMoved = currentMove.data.hasOwnProperty('currentMove')
+    useEffect(() => {
+        setMoveAvailable(!!currentMove);
+    }, [currentMove]);
 
-    function handleSubmit(event) {
+    function handleSubmit(currentMove) {
         event.preventDefault()
         const postUrl = 'http://localhost:3001/post'
         const formData = new FormData(event.target)
         const title = formData.get('title')
         const content = formData.get('content')
 
-        if(playerHasMoved) {
+        if(true) {
             const comment = {
                 title: title,
                 content: content,
@@ -61,11 +66,10 @@ export default function CommentSection(currentMove) {
             >
                   <TextField id='title_field' label="Title" variant="outlined" name="title"/>
                   <MinHeightTextarea label="Content" id="content_field" variant="outlined" name="content" aria-label="minimum height" minRows={3} placeholder="Minimum 3 rows" />
-                  <Button disabled={!playerHasMoved} type="submit" variant="filled">Submit</Button>
+                  <Button disabled={!moveAvailable} type="submit" variant="filled">Submit</Button>
             </Box>
         </>
-    )
-     
+    ) 
 }
 
 

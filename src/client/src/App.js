@@ -1,8 +1,10 @@
 import ChessBoard from './components/chessboard';
-import CommentSection from './components/comments';
+import PlayerCards from './components/playerbox';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { color, Grid } from '@mui/system';
+import { Grid } from '@mui/system';
+import CommentSection from './components/comments';
+import TabbedArea from './components/tabarea';
 import {Box} from '@mui/system';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -11,28 +13,31 @@ import '@fontsource/roboto/700.css';
 
 
 function App() {
-  let [dataStore, setDataStore] = useState({})
+  let [moves, setMoves] = useState([])
   
   useEffect(() => {
-    if ( dataStore !== null) {
-      console.log("Turn data updated:", dataStore);
+    if ( moves !== null) {
+      console.log("Turn data updated:", moves);
     }
-  }, [dataStore])
+  }, [moves])
 
   const callback = (data) => {
-    setDataStore({
-      currentMove: data 
-    })
+    setMoves([
+      ...moves,
+      {data}
+    ])
   };
 
   return (
-    <Box sx={{}}>
+    <Box>
       <Grid container spacing={2} margin={'64px'}>
         <Grid justifyContent='center' size={{sm:2, md:4, lg:6}}>
-            <ChessBoard callback={callback}/> 
+            <PlayerCards/>
+              <ChessBoard callback={callback}/> 
+            <PlayerCards/>
         </Grid>
-        <Grid sx={{background:'#A9AFB1'}} size={4} padding="32px">
-          <CommentSection data={dataStore}/>
+        <Grid sx={{background:'#A9AFB1'}} size={{sm: 4, md: 6, lg: 6}} padding="32px">
+          <TabbedArea children={[<CommentSection moves={moves}/>]} moves={moves}/>
         </Grid>
       </Grid>
     </Box>
