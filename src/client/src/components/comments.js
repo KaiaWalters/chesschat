@@ -15,6 +15,7 @@ export default function CommentSection(currentMove) {
     }, [currentMove]);
 
     function handleSubmit(currentMove) {
+        console.log("handle submit",currentMove)
         event.preventDefault()
         const postUrl = 'http://localhost:3001/post'
         const formData = new FormData(event.target)
@@ -42,7 +43,7 @@ export default function CommentSection(currentMove) {
             .then((response) => {
                 document.getElementById('title_field').value = ''
                 document.getElementById('content_field').value = ''
-                return response.json();
+              return response.json();
             })
             .catch((error) => {
                 console.error('Error:', error);
