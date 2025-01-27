@@ -5,15 +5,15 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function CommentCard() {
+export default function CommentCard(content) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-            title
+            {content.title}
         </Typography>
         <Typography variant="h5" component="div">
-            content
+            {content.comment}
         </Typography>
       </CardContent>
       <CardActions>
