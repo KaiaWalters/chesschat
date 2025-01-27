@@ -21,11 +21,12 @@ function App() {
     }
   }, [moves])
 
-  const callback = (data) => {
+  const callback = (playerMove) => {
     setMoves([
       ...moves,
-      {data}
+      {playerMove}
     ])
+    console.log("player moved",playerMove)
   };
 
   return (

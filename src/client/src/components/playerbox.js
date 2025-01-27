@@ -4,9 +4,9 @@ import {Box} from "@mui/system";
 
 export default function PlayerCards() {
     return (
-        <Grid container justifyContent={'space-between'} flexDirection="row" margin={'10px'}>
+        <Grid container justifyContent={'space-between'} flexDirection="row" paddingY={'8px'}>
             <Grid item>
-                <Grid container spacing={4} flexDirection="row">
+                <Grid container spacing={1} flexDirection="row">
                     <Grid item>
                         <ProfilePhoto 
                             src='/userprofilepic.jpg'
@@ -14,8 +14,8 @@ export default function PlayerCards() {
                         />
                     </Grid>
                     <Grid item>
-                        <Typography>
-                        Fallin
+                        <Typography fontWeight={400} sx={{color:'white'}}>
+                            Fallin
                         </Typography>
                     </Grid>
                 </Grid>
@@ -47,7 +47,7 @@ const ProfilePhoto = ({ src, alt }) => {
 
 const Timer = ({}) => {
     return (
-        <Box sx={{backgroundColor:'white', height: '50px', width: '80px', padding:'8px', borderRadius:'5px'}}>
+        <Box sx={{backgroundColor:'white', height: 'wrap-content', width: '80px', padding:'8px', borderRadius:'5px'}}>
             36:42:00
         </Box>
     )
