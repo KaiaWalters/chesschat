@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Github Configurations 
+
+- The issue and pull request templates can be edited. They exist as markdown files in the root of the project inside of the .github folder. 
+
+- Inspiration for the pull request template was taken from this repo: https://github.com/appium/appium/blob/master/.github/PULL_REQUEST_TEMPLATE.md
+
